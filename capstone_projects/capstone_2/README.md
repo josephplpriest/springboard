@@ -29,7 +29,7 @@ In the [EDA](/notebooks/02_Exploratory_Data_Analysis.ipynb) we looked at relatio
 
 ## Preprocessing and Training Initial models
 
-In the [Preprocessing and Training](/notebooks/03_Preprocessing_and_Training.ipynb) we converted our text to numbers (vectorized) using two methods. Machine learning models need numeric input for prediction. We tried both Count Vectorization aka [Count-Vec](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html) and Term-Frequency Inverse-Document Frequency aka [TF-IDF](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html). 
+In the [Preprocessing and Training](/notebooks/03_Preprocessing_and_Training.ipynb) we converted our text to numbers (vectors) using two methods. Machine learning models need numeric input for prediction. We tried both Count Vectorization aka [Count-Vec](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html) and Term-Frequency Inverse-Document Frequency aka [TF-IDF](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html). 
 
 Count Vec uses simple word counts to generate a matrix of vocabulary proportions. Our TF-IDF used both unigrams and bi-grams and removed the most common words that appeared in 90+ percent of review texts. The Count Vec vocab size was about 75279 features (columns) while the TF-IDF vectorization produced 2,310,780(!) features/columns.
 
@@ -44,5 +44,13 @@ The best initial model with minimal tuning was the Logistic Regression with TFID
 
 In the [Modeling](/notebooks/04_Modeling.ipynb) we used only TFIDF, despite the much larger matrix with 2+ million features. The increased info for the model using bigrams (the difference between "bad fit" vs "good fit" for instance) gave better metrics across all models.
 
+Because of the imbalance of the data, we test out a set of options for under/over-sampling to improve model performance.
+
+The three algorithms we attempt to use for prediction are Logistic Regression (the best "simple" model from the previous notebook), as well as two tree-based classification models, LightGBMClassifier and XGBoostClassifier.
+
+To optimize hyper-parameters, we implement a custom Optuna fuction which uses bayesian search across a range of chosen parameters. For quicker iteration, we use a small, random subset of the training data for training and evaluate models using recall on the training set.
+
+
 
 ## Analysis and Summary
+
