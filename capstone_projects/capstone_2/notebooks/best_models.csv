@@ -1,0 +1,6 @@
+number,value,datetime_start,datetime_complete,duration,params_C,params_classifier,params_learning_rate,params_max_depth,params_n_estimators,state
+97,0.841938536224133,2022-08-09 02:35:41.225839,2022-08-09 02:37:34.537309,0 days 00:01:53.311470,,xgboost,0.1,17.0,500.0,COMPLETE
+number,value,datetime_start,datetime_complete,duration,params_C,params_classifier,params_learning_rate,params_max_depth,params_n_estimators,state
+106,0.8445268119737319,2022-08-09 02:37:51.645079,2022-08-09 02:38:43.209772,0 days 00:00:51.564693,,lgbm,0.01,20.0,1000.0,COMPLETE
+number,value,datetime_start,datetime_complete,duration,params_C,params_classifier,params_learning_rate,params_max_depth,params_n_estimators,state
+35,0.9164345403899722,2022-08-09 01:40:03.147489,2022-08-09 01:40:04.929709,0 days 00:00:01.782220,0.01,logreg,,,,COMPLETE
