@@ -44,13 +44,27 @@ The best initial model with minimal tuning was the Logistic Regression with TFID
 
 In the [Modeling](/notebooks/04_Modeling.ipynb) we used only TFIDF, despite the much larger matrix with 2+ million features. The increased info for the model using bigrams (the difference between "bad fit" vs "good fit" for instance) gave better metrics across all models.
 
-Because of the imbalance of the data, we test out a set of options for under/over-sampling to improve model performance.
+Because of the imbalance of the data, we test out a set of options for under/over-sampling to improve model performance. Random-undersampling of the majority class, over-sampling of the minority class, as well as synthetic data generation with SMOTE and ADASYN.
 
-The three algorithms we attempt to use for prediction are Logistic Regression (the best "simple" model from the previous notebook), as well as two tree-based classification models, LightGBMClassifier and XGBoostClassifier.
+![](images/newplot.png)
+
+The time complexity of SMOTE and ADASYN is roughly O(n^2) due to using KNN to create synthetic values. This was very, very slow on even small-to-medium training sets. It also did not improve the model recall. ADASYN is slightly slower than SMOTE due to also adding random noise to the new values.
+
+The three final algorithms we use for prediction are Logistic Regression (the best "simple" model from the previous notebook), as well as two tree-based classification models, LightGBMClassifier and XGBoostClassifier.
 
 To optimize hyper-parameters, we implement a custom Optuna fuction which uses bayesian search across a range of chosen parameters. For quicker iteration, we use a small, random subset of the training data for training and evaluate models using recall on the training set.
 
 
-
 ## Analysis and Summary
+
+In summary, the logistic regression model performs the best on a number of metrics. It is the fastest to train by far, especially as the size of the data increases. Because we have a binary (positive or negative) classification problem, the decision boundary or hyperplane is linear. Logistic regression is perfect for this type of problem. It computes very quickly and gives feature weights (coefficients) for easy interperability.
+
+|Model|Recall|Train/Predict Time on ~150K Rows|
+|-----|-----|-----|
+|Logistic Regression|.91|2 seconds|
+|XGBoost|.84|5 minutes and 30 seconds|
+|LightGBM|.84|1 minute|
+
+
+XGBoost and LightGBM models may have better metrics on multiclass problems, but were less effective here.
 
