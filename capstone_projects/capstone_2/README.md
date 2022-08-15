@@ -52,7 +52,7 @@ The time complexity of SMOTE and ADASYN is roughly O(n^2) due to using KNN to cr
 
 The three final algorithms we use for prediction are Logistic Regression (the best "simple" model from the previous notebook), as well as two tree-based classification models, LightGBMClassifier and XGBoostClassifier.
 
-To optimize hyper-parameters, we implement a custom Optuna fuction which uses bayesian search across a range of chosen parameters. For quicker iteration, we use a small, random subset of the training data for training and evaluate models using recall on the training set.
+To optimize hyper-parameters, we implement a custom Optuna fuction which uses bayesian search across a range of chosen parameters. For quicker iteration, we use a small, random subset of the training data for training and evaluate models using recall on a held-out test set.
 
 
 ## Analysis and Summary
